@@ -53,7 +53,7 @@ static char* python_find_attr(PyObject* module, char* f1, char* f2);
 int ices_PyInt_Check(PyObject* pyObj);
 long ices_PyAsLong(PyObject* pyObj);
 int ices_PyString_Check(PyObject* pyObj);
-char* ices_PyAsString(PyObject* pyObj);
+const char* ices_PyAsString(PyObject* pyObj);
 
 /* Call python function to initialize the python script */
 int ices_playlist_python_initialize(playlist_module_t* pm) {
@@ -169,9 +169,12 @@ static int python_init(void) {
 	if (python_setup_path() < 0)
 		return -1;
 
-	Py_Initialize();
 	ices_log_debug("Python version: %d", PY_MAJOR_VERSION);
 	ices_log_debug("Importing %s.py module...", ices_config.pm.module);
+	Py_Initialize();
+	PyRun_SimpleString("import sys");
+	//reopen stdout to be line buffered rather than block buffered
+	PyRun_SimpleString("sys.stdout = open(1, mode='w', buffering=1)");
 
 	/* Call the python api code to import the module */
 	if (!(python_module = PyImport_ImportModule(ices_config.pm.module))) {
@@ -284,7 +287,7 @@ int ices_PyString_Check(PyObject* pyObj) {
 	#endif	
 }
 
-char* ices_PyAsString(PyObject* pyObj) {
+const char* ices_PyAsString(PyObject* pyObj) {
 	#if PY_MAJOR_VERSION >= 3
 		return PyUnicode_AsUTF8(pyObj);
 	#else 

@@ -40,7 +40,7 @@ typedef struct {
 } flac_in_t;
 
 /* -- static prototypes -- */
-static int ices_flac_readpcm (input_stream_t* self, size_t len,
+static ssize_t ices_flac_readpcm (input_stream_t* self, size_t len,
                               int16_t* left, int16_t* right);
 static int ices_flac_close (input_stream_t* self);
 
@@ -158,7 +158,7 @@ errDecoder:
         return -1;
 }
 
-static int
+static ssize_t
 ices_flac_readpcm (input_stream_t* self, size_t olen, int16_t* left,
                    int16_t* right)
 {
@@ -210,8 +210,10 @@ flac_read_cb(const FLAC__StreamDecoder* decoder, FLAC__byte buffer[],
                 }
                 if ((len = read(self->fd, buffer, *bytes)) > 0)
                         return FLAC__STREAM_DECODER_READ_STATUS_CONTINUE;
-                if (!len)
+                if (!len) {
+                        *bytes = 0;
                         return FLAC__STREAM_DECODER_READ_STATUS_END_OF_STREAM;
+                }
                 ices_log_error("Error reading FLAC stream: %s", ices_util_strerror(errno, errbuf, sizeof(errbuf)));
                 return FLAC__STREAM_DECODER_READ_STATUS_ABORT;
         }

@@ -121,7 +121,7 @@ char *ices_util_read_line(FILE *fp) {
 		if (!fgets(temp, 1024, fp)) {
 
 			if (!feof(fp)) {
-				ices_log_error("Got error while reading file, error: [%s]", ices_util_strerror(errno, temp, 1024));
+				ices_log_error("Got error while reading file, error: [%s]", ices_util_strerror(errno, temp, 1023));
 				return NULL;
 			}
 		}
@@ -288,4 +288,24 @@ int ices_util_verify_file(const char *filename) {
 	ices_util_fclose(fp);
 
 	return 1;
+}
+
+void ices_util_scrub_string(char *input, int inputLen, char *scrub, int scrubLen) {
+	int cp = 0;
+	int i = 0;
+	for(; i < inputLen && input[i] != '\0'; i++) {
+		int found = 0;
+		for(int j = 0; j < scrubLen; j++) {
+			if(input[i] == scrub[j]) {
+				found = 1;
+				break;
+			}
+		}
+		if(!found) {
+			char tmp = input[i];
+			input[cp] = tmp;
+			cp++;
+		}
+	}
+	input[cp] = '\0';
 }

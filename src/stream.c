@@ -34,16 +34,14 @@
 #include "in_flac.h"
 #endif
 
-#ifdef TIME_WITH_SYS_TIME
-#  include <sys/time.h>
+
+#ifdef HAVE_SYS_TIME_H
 #  include <time.h>
+#  include <sys/time.h>
 #else
-#  ifdef HAVE_SYS_TIME_H
-#    include <sys/time.h>
-#  else
 #    include <time.h>
-#  endif
 #endif
+
 
 /* needed for directory checking */
 #include <sys/types.h>
@@ -80,6 +78,8 @@ void ices_stream_loop(ices_config_t* config) {
 	int rc;
 	int timelimit;
 	time_t now;
+
+	source.codecStruct = NULL;
 
 	while (1) {
 		source.path = ices_playlist_get_next();
@@ -199,8 +199,9 @@ static int stream_send(ices_config_t* config, input_stream_t* source) {
 	}
 #endif
 
-	for (stream = config->streams; stream; stream = stream->next)
+	for (stream = config->streams; stream; stream = stream->next) {
 		stream->errs = 0;
+	}
 
 	ices_log("Playing %s", source->path);
 
@@ -214,7 +215,7 @@ static int stream_send(ices_config_t* config, input_stream_t* source) {
 			len = source->read(source, ibuf, sizeof(ibuf));
 #ifdef HAVE_LIBLAME
 			if (decode) {
-				samples = ices_reencode_decode(ibuf, len, sizeof(left), left, right);
+				samples = ices_reencode_decode(source, ibuf, len, sizeof(left), left, right);
 				if (samples < 0) {
 					ices_log_debug("ices_reencode_decode reports %d samples.", samples);
 					goto err;
