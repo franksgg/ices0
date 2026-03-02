@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<ices:Configuration xmlns:ices="http://www.icecast.org/projects/ices">
+<ices>
   <Playlist>
-    <!-- This is the filename used as a playlist when using the builtin 
+    <!-- This is the filename used as a playlist when using the builtin
 	 playlist handler. -->
     <File>playlist.txt</File>
     <!-- Set this to 0 if you don't want to randomize your playlist, and to
@@ -90,4 +90,4 @@
     <!-- Number of channels to reencode to, 1 for mono or 2 for stereo -->
     <Channels>2</Channels>
   </Stream>
-</ices:Configuration>
+</ices>

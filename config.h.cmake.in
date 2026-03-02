@@ -40,7 +40,7 @@
 #define PACKAGE_STRING "ices ${PROJECT_VERSION}"
 #define PACKAGE_TARNAME "ices"
 #define PACKAGE_VERSION "${PROJECT_VERSION}"
-#define PACKAGE_BUGREPORT "icecast@xiph.org"
+#define PACKAGE_BUGREPORT "inofficial"
 #define VERSION "${PROJECT_VERSION}"
 
 /* Install-time paths */

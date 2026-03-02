@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(ices VERSION 0.6.2 LANGUAGES C)
+project(ices VERSION 0.6.2.1  LANGUAGES C)
 
 # Set the source directory for CMake to find custom modules if any
 # list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
