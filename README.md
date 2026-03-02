@@ -79,58 +79,30 @@ sudo apt-get install libpython-dev libperl-dev
 
 ## Building
 
-### Building with Homebrew (MacOS X)
 
-Open a terminal and simply enter:
-
-```bash
-brew install Moonbase59/tap/ices0
-```
-
-If you don’t have current versions of _Python2_ and/or _Perl_ on your system and wish to use ices0’s _scripting features_, you can pull the latest versions in using a command like:
-
-```bash
-brew install --with-python2 --with-perl Moonbase59/tap/ices0
-```
 
 ### Building manually
 
-You need git and a working automake build environment.
+You need git and a working cmake build environment.
 
 ```bash
-git clone https://github.com/Moonbase59/ices0.git
+git clone https://github.com/franksgg/ices0
 cd ices0
-aclocal
-autoreconf -fi
-automake --add-missing
-./configure
+mkdir build
+
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release \
+  -DWITH_XML=ON -DWITH_PYTHON=ON -DWITH_PERL=ON -DWITH_LAME=ON \
+  -DWITH_VORBIS=ON -DWITH_FAAD=ON -DWITH_FLAC=ON
+
+
+cmake --build build -j
 ```
 
-Check `configure`'s ouput. Ideally, it should end like this:
-```
-Features:
-  XML     : yes
-  Python  : yes
-  Perl    : yes
-  LAME    : yes
-  Vorbis  : yes
-  MP4     : yes
-  FLAC    : yes
-```
-(This is a full build with all features.)
 
+The result may be installed with:
 ```bash
-make
-sudo make install
+sudo cmake --install build 
+or
+su  -c "cmake --install build"
 ```
 
-You can also create a distribution .tar.gz file:
-```bash
-make dist
-```
-
-Before making a pull request, please clean up using
-```bash
-make maintainer-clean
-```
-so you won't be pushing unneccessary temp files to GitHub.
