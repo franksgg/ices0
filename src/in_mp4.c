@@ -42,7 +42,7 @@ typedef struct {
 
 /* -- static prototypes -- */
 static void ices_mp4_read_metadata(MP4FileHandle mp4file);
-static int ices_mp4_readpcm(input_stream_t* self, size_t len,
+static ssize_t ices_mp4_readpcm(input_stream_t* self, size_t len,
 			    int16_t* left, int16_t* right);
 static int ices_mp4_close(input_stream_t* self);
 
@@ -224,7 +224,7 @@ static void ices_mp4_read_metadata(MP4FileHandle mp4file) {
 }
 
 
-static int ices_mp4_readpcm(input_stream_t* self, size_t olen, int16_t* left,
+static ssize_t ices_mp4_readpcm(input_stream_t* self, size_t olen, int16_t* left,
 			    int16_t* right) {
 	mp4_in_t* mp4_data = (mp4_in_t*) self->data;
 	unsigned char* buf;
