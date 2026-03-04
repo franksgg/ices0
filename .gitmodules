@@ -1,0 +1,3 @@
+[submodule "icecast-kh-docker"]
+	path = icecast-kh-docker
+	url = https://github.com/franksgg/icecast-kh-docker.git

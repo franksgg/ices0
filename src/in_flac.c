@@ -76,7 +76,7 @@ ices_flac_open (input_stream_t* self, char* buf, size_t len)
         flac_in_t* flac_data;
         FLAC__StreamDecoder* decoder;
 
-        if (!(decoder = FLAC__stream_decoder_new())) {
+        if (!((decoder = FLAC__stream_decoder_new()))) {
                 ices_log_error("ices_flac_open: Error allocating FLAC decoder");
                 return -1;
         }
@@ -112,7 +112,7 @@ ices_flac_open (input_stream_t* self, char* buf, size_t len)
         }
 #endif /* !FLAC_API_VERSION_CURRENT || FLAC_API_VERSION_CURRENT <= 7 */
 
-        if (!(flac_data = (flac_in_t*)malloc (sizeof (flac_in_t)))) {
+        if (!((flac_data = (flac_in_t*)malloc (sizeof (flac_in_t))))) {
                 ices_log_error ("Malloc failed in ices_flac_open");
                 goto errDecoder;
         }
