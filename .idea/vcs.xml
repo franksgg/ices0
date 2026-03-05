@@ -3,5 +3,6 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/icecast-kh-docker" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/icecast-kh-docker/config/icecast-kh" vcs="Git" />
   </component>
 </project>
