@@ -1,0 +1,10 @@
+../../examples/flac/mm2016-02-11_24bit_t01.flac
+../../examples/flac/mm2016-02-11_24bit_t02.flac
+../../examples/flac/mm2016-02-11_24bit_t03.flac
+../../examples/flac/mm2016-02-11_24bit_t04.flac
+../../examples/flac/mm2016-02-11_24bit_t05.flac
+../../examples/flac/mm2016-02-11_24bit_t06.flac
+../../examples/flac/mm2016-02-11_24bit_t07.flac
+../../examples/flac/mm2016-02-11_24bit_t08.flac
+../../examples/flac/mm2016-02-11_24bit_t09.flac
+../../examples/flac/mm2016-02-11_24bit_t10.flac

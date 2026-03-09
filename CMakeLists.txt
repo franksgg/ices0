@@ -192,3 +192,9 @@ add_subdirectory(doc)
 add_subdirectory(conf)
 
 # Installation of config and docs could be added here
+
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    message(STATUS "Debug build: Copying examples to binary directory")
+    file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/examples/config/ices.conf" DESTINATION "${CMAKE_BINARY_DIR}/src")
+    file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/examples/playlist/playlist.txt" DESTINATION "${CMAKE_BINARY_DIR}/src")
+endif()

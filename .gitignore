@@ -58,3 +58,4 @@ libtool
 *.o
 *.a
 ices
+/examples/flac/
