@@ -1,0 +1,15 @@
+services:
+  ices:
+    build: ./
+    container_name: ices-fsg
+    image: ices-fsg
+    #depends_on:
+    #  - icecast
+    volumes:
+      - "/var/data/music:/media:ro"
+      - "./examples/config/ices.conf:/etc/ices/ices.conf:ro"
+    environment:
+      STREAM_HOST: icecast
+    restart: always
+
+    command: /usr/bin/ices -c /etc/ices/ices.conf
